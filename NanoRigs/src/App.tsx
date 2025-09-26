@@ -1,12 +1,15 @@
-import "./App.css";
-
-import Header from "./components/header";
+import { Header } from "./components/header";
+import { Dropdown } from "./components/products";
 
 function App() {
   return (
     <>
       <Header />
-      <main className="p-10"></main>
+
+      <Dropdown
+        label="Products"
+        items={["Product 1", "Product 2", "Product 3"]}
+      />
     </>
   );
 }
