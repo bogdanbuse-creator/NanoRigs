@@ -1,35 +1,28 @@
-import React, { useState } from "react";
 
-type DropdownProps = {
-  label: string; // Text for the main link
-  items: string[]; // Array of dropdown items
-};
 
-export function Dropdown({ label, items }: DropdownProps) {
-  const [isOpen, setIsOpen] = useState(false);
+import React from "react";
+import { Link } from "react-router-dom";
+
+export function HeaderNav() {
+  const links = [
+    { name: "Prebuilds", href: "/prebuilds" },
+    { name: "Components", href: "/components" },
+    { name: "Repairs", href: "/repairs" },
+    { name: "Configurator", href: "/configurator" },
+  ];
 
   return (
-    <div
-      className="relative"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
-    >
-      {/* Main link */}
-      <button className="hover:text-gray-300 font-medium">{label}</button>
-
-      {/* Dropdown menu */}
-      {isOpen && (
-        <ul className="absolute left-0 mt-2 w-40 bg-white text-black rounded shadow-lg z-50">
-          {items.map((item) => (
-            <li
-              key={item}
-              className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <nav className="flex space-x-30 text-[24px] font-semibold items-center justify-center flex-1">
+      {links.map((link) => (
+        <Link
+          key={link.name}
+          to={link.href}
+          className="relative group transition-colors duration-200"
+        >
+          <span className="group-hover:text-blue-500">{link.name}</span>
+          <span className="absolute left-0 -top-2 w-full h-[2px] bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+        </Link>
+      ))}
+    </nav>
   );
 }
